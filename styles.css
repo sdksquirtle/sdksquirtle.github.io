@@ -1,0 +1,191 @@
+/* ===== ARCHITECTURAL VARIABLES SCHEMA ===== */
+:root {
+    --bg-primary: #05070A;
+    --bg-sidebar: rgba(10, 12, 18, 0.95);
+    --bg-card: linear-gradient(145deg, #0D1117, #07090D);
+    --border-color: #1A2333;
+    --border-hover: #D4AF37;
+    --accent-gold: #D4AF37;
+    --text-primary: #D1D7E0;
+    --text-muted: #526685;
+    --terminal-green: #00FF66;
+    --font-terminal: 'Courier New', Courier, monospace;
+}
+
+/* SONAR RADAR HUD DESIGN CONFIGURATION OVERRIDE */
+body.vision-sonar-active {
+    --bg-primary: #030F0A;
+    --bg-sidebar: rgba(5, 20, 12, 0.97);
+    --bg-card: linear-gradient(145deg, #0A1C12, #040F0A);
+    --border-color: #0F3820;
+    --border-hover: #00FF66;
+    --accent-gold: #00FF66;
+    --text-primary: #E0F5EB;
+    --text-muted: #2E7A4C;
+}
+
+/* ===== BASE LAYOUT STRUCTURAL MATRIX ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-terminal);
+}
+html { scroll-behavior: smooth; }
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+body::before {
+    content: ""; position: fixed; inset: 0; z-index: -2;
+    background: linear-gradient(rgba(255,255,255,0.004) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.004) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+.container { display: flex; }
+
+/* TACTICAL SIDEBAR NAVIGATION PANEL */
+.sidebar {
+    width: 280px; height: 100vh; background: var(--bg-sidebar);
+    border-right: 2px solid var(--border-color); padding: 30px 20px;
+    position: fixed; top: 0; left: 0; z-index: 10;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+.logo-area { text-align: center; border-bottom: 1px dashed var(--border-color); padding-bottom: 20px; }
+.bat-icon { font-size: 28px; color: var(--accent-gold); margin-bottom: 8px; }
+.logo-title { font-size: 11px; font-weight: 900; color: var(--text-muted); letter-spacing: 2px; }
+.menu { margin-top: 20px; flex-grow: 1; }
+.menu a {
+    display: flex; align-items: center; color: var(--text-muted); text-decoration: none;
+    padding: 12px 15px; margin: 8px 0; border-left: 3px solid transparent;
+    font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;
+}
+.menu a:hover, .menu a.active {
+    color: var(--accent-gold); background: rgba(212, 175, 55, 0.03); border-left-color: var(--accent-gold); padding-left: 20px;
+}
+
+/* DROP CONSOLE PANEL MODULATORS */
+.language-module { margin: 10px 0; border: 1px solid var(--border-color); background: rgba(0,0,0,0.3); padding: 8px; border-radius: 2px; }
+.lang-title { font-size: 9px; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; text-align: center; }
+.lang-toggle-wrapper { display: flex; border: 1px solid var(--border-color); }
+.lang-btn {
+    flex: 1; background: transparent; border: none; color: var(--text-muted);
+    padding: 6px 0; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.2s;
+}
+.lang-btn.active { background: var(--accent-gold); color: #05070A; }
+.tactical-dropdown {
+    width: 100%; background: #0B0E14; border: 1px solid var(--border-color); color: var(--accent-gold);
+    padding: 6px; font-size: 10px; font-family: var(--font-terminal); outline: none; text-transform: uppercase; cursor: pointer;
+}
+.system-status { font-size: 10px; color: var(--text-muted); border-top: 1px dashed var(--border-color); padding-top: 15px; text-transform: uppercase; }
+.status-pulse { display: inline-block; width: 6px; height: 6px; background: var(--terminal-green); border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite; }
+
+/* MAIN HUD VIEWPORT DISPLAY ENGINE */
+.main { margin-left: 280px; padding: 40px; width: calc(100% - 280px); min-height: 100vh; }
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+.topbar h2 { font-size: 15px; color: var(--text-muted); letter-spacing: 1px; }
+.topbar h2 span { color: var(--accent-gold); }
+.search-box { padding: 10px 16px; border: 1px solid var(--border-color); background: #0B0E14; color: var(--terminal-green); outline: none; width: 300px; font-size: 11px; }
+.hud-section { margin-top: 30px; }
+.section-header { color: var(--text-muted); font-size: 12px; letter-spacing: 2px; margin-bottom: 25px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+.section-header::after { content: ""; flex-grow: 1; height: 1px; background: linear-gradient(90deg, var(--border-color), transparent); }
+.row-rail { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 15px; }
+.row-rail::-webkit-scrollbar { height: 4px; }
+.row-rail::-webkit-scrollbar-thumb { background: var(--border-color); }
+
+/* ===== MASTER DYNAMIC CARD LAYOUT SCHEMATICS ===== */
+.bat-card {
+    background: var(--bg-card); border: 2px solid var(--border-color); border-top: 4px solid var(--accent-gold);
+    border-radius: 4px; padding: 25px; position: relative; cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s, box-shadow 0.3s;
+}
+.bat-card:hover { border-color: var(--border-hover); box-shadow: 0 0 25px rgba(212, 175, 55, 0.1); transform: translateY(-5px); }
+.bat-card::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to bottom, transparent 50%, rgba(212, 175, 55, 0.01) 50%); background-size: 100% 4px; animation: scanlines 8s linear infinite;
+}
+@keyframes scanlines { from { background-position: 0 0; } to { background-position: 0 100%; } }
+
+/* PROFILE PANEL ESOTERIC VARIATIONS */
+.profile-wrapper { display: flex; justify-content: center; width: 100%; }
+.profile-card { width: 440px; }
+.avatar-frame { width: 110px; height: 110px; margin: 0 auto 15px auto; border: 2px solid var(--border-color); padding: 4px; position: relative; background: var(--bg-primary); }
+.avatar-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(115%); border: 1px solid var(--text-muted); }
+.avatar-fallback { display: none; width: 100%; height: 100%; background: #10141D; align-items: center; justify-content: center; font-size: 10px; color: var(--text-muted); }
+.profile-name { text-align: center; font-size: 20px; font-weight: 800; color: #FFFFFF; letter-spacing: 1px; margin-bottom: 4px; text-transform: uppercase; }
+.profile-title { text-align: center; font-size: 11px; color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; font-weight: bold; }
+.meta-grid { border-top: 1px dashed var(--border-color); border-bottom: 1px dashed var(--border-color); padding: 12px 0; margin-bottom: 15px; }
+.meta-row { display: flex; justify-content: space-between; font-size: 11px; margin: 6px 0; }
+.meta-label { color: var(--text-muted); text-transform: uppercase; }
+.meta-value { color: var(--text-primary); font-weight: bold; }
+.skills-header { font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+.tags-wrapper { display: flex; flex-wrap: wrap; gap: 6px; }
+.tech-tag { font-size: 10px; padding: 4px 8px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--text-primary); font-weight: bold; }
+
+/* ASSET LIST GRID SPECIFICS */
+.armory-card { min-width: 240px; text-align: left; }
+.item-icon { font-size: 24px; margin-bottom: 12px; color: var(--accent-gold); }
+.item-name { font-size: 13px; font-weight: bold; color: #FFFFFF; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.item-spec { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+
+/* SUIT CONFIGURATION INDEPENDENT EDGE CLASSES */
+.profile-card.suit-arkham { border-top-color: #D4AF37 !important; }
+.profile-card.suit-beyond { border-top-color: #FF0033 !important; box-shadow: 0 0 25px rgba(255, 0, 51, 0.1) !important; }
+.profile-card.suit-beyond .profile-title { color: #FF0033 !important; }
+.profile-card.suit-hellbat { border-top-color: #FF7700 !important; box-shadow: 0 0 35px rgba(255, 119, 0, 0.15) !important; }
+.profile-card.suit-hellbat .profile-title { color: #FF7700 !important; }
+
+/* GUN SECURITY MODIFIERS HUD SCAN LINES */
+.profile-card.weapon-active { outline: 2px dashed var(--terminal-green); outline-offset: 4px; }
+
+/* ===== OVERLAY TERMINAL SCREEN POPUP ===== */
+.bat-modal { position: fixed; inset: 0; background: rgba(5, 7, 10, 0.96); display: none; justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.25s ease; }
+.bat-modal.open { display: flex; opacity: 1; }
+.modal-terminal { width: 440px; background: #07090D; border: 2px solid var(--accent-gold); padding: 30px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.15); }
+.modal-terminal h3 { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+.modal-terminal p { font-size: 12px; line-height: 1.6; color: #A9B9D1; margin-bottom: 25px; }
+.terminal-btn { display: block; width: 100%; padding: 10px; background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold); font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 11px; transition: 0.2s; }
+.terminal-btn:hover { background: var(--accent-gold); color: #05070A; }
+
+/* ===== HIGH DENSITY PARTICLES ANIMATION GRID ===== */
+.animation-canvas { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
+.bat-particle { position: absolute; color: var(--accent-gold); opacity: 0.08; font-size: 12px; will-change: transform; animation: swarm linear infinite; }
+.data-node-particle { 
+  position: absolute; 
+  width: 2px; 
+  height: 2px; 
+  background: var(--terminal-green); 
+  opacity: 0; 
+  box-shadow: 0 0 4px var(--terminal-green); 
+  will-change: transform; 
+  animation: digitalRain 3s linear infinite; 
+}
+
+@keyframes digitalRain {
+  0% { 
+    transform: translate3d(0, -10px, 0); 
+    opacity: 0; 
+  }
+  5% { 
+    opacity: 0.25; 
+  } 
+  95% { 
+    opacity: 0.25; 
+  }
+  100% { 
+    transform: translate3d(0, 105vh, 0); 
+    opacity: 0; 
+  }
+}
+
+@keyframes pulse { 
+  0%, 100% { opacity: 0.4; } 
+  50% { opacity: 1; } 
+}
+
+.hidden { 
+  display: none !important; 
+}
