@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Web</title>
+    <title>Wayne OS // Architecture Interface</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="vision-night">
@@ -90,7 +90,7 @@
                             </div>
                             <div class="meta-row">
                                 <span class="meta-label" id="lbl-stat">Status:</span>
-                                <span class="meta-value" id="val-stat" style="color: var(--terminal-green);">Active Agent</span>
+                                <span class="meta-value" id="val-stat" style="color: var(--terminal-green, #00ff66);">Active Agent</span>
                             </div>
                             <div class="meta-row">
                                 <span class="meta-label" id="lbl-clr">Clearance:</span>
@@ -149,27 +149,35 @@
                     <div class="bat-card armory-card" onclick="openTerminal('weapon3')">
                         <div class="item-icon">📡</div>
                         <div class="item-name">Explosive Gel Dispenser</div>
-                        <div class="item-spec">Type: Liquid Aerosol Charge // Proximity Detonation</div>
+                        <div class="item-spec">Type: Aerosolized Blast Charge // Breach Device</div>
                     </div>
                 </div>
             </section>
 
-            <!-- ERROR BLOCK -->
-            <div id="no-records" class="hidden" style="text-align: center; color: var(--text-muted); padding: 40px; font-size: 11px; text-transform: uppercase;">
-                <span id="lbl-norecords">⚠️ Alert: Item or Operative completely filtered out of active radar.</span>
-            </div>
+            <!-- EMPTY RESULTS ERROR ALERT -->
+            <div id="no-records" class="radar-alert" style="display: none;">⚠️ Alert: Item or Operative completely filtered out of active radar.</div>
         </main>
     </div>
 
-    <!-- MODAL POPUP -->
-    <div class="bat-modal" id="terminal-modal" onclick="closeTerminalOnLayout(event)">
-        <div class="modal-terminal">
-            <h3 id="t-name">SYSTEM COMPILING...</h3>
-            <p id="t-desc">Decrypting structural memory sector variables...</p>
-            <button class="terminal-btn" id="btn-modal-close" onclick="closeTerminal()">Acknowledge</button>
+    <!-- TERMINAL COMMUNICATIONS MODAL OVERLAY -->
+    <div id="terminal-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-window">
+            <div class="modal-header">
+                <span class="modal-dot"></span>
+                <span class="modal-dot"></span>
+                <span class="modal-dot"></span>
+                <div class="modal-title-text" id="modal-header-text">SECURE TERMINAL DATAFEED</div>
+            </div>
+            <div class="modal-body" id="modal-body-text">
+                ESTABLISHING ENCRYPTED DATALINK...
+            </div>
+            <div class="modal-footer">
+                <button id="btn-modal-close" class="modal-btn" onclick="closeTerminal()">Acknowledge</button>
+            </div>
         </div>
     </div>
 
+    <!-- PIPELINE SCRIPT DEPLOYMENT -->
     <script src="app.js"></script>
 </body>
 </html>
