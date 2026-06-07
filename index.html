@@ -1,323 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anime System V4 Ultra Pro</title>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:system-ui;
-}
-
-body{
-background:#070A12;
-color:white;
-overflow-x:hidden;
-}
-
-/* ===== BACKGROUND GRID ===== */
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-background-size:60px 60px;
-z-index:-2;
-}
-
-/* glowing aura */
-body::after{
-content:"";
-position:fixed;
-inset:0;
-background:radial-gradient(circle at 20% 20%, rgba(255,0,80,0.15), transparent 40%),
-radial-gradient(circle at 80% 40%, rgba(255,200,0,0.12), transparent 45%),
-radial-gradient(circle at 50% 80%, rgba(0,120,255,0.12), transparent 50%);
-z-index:-1;
-animation:move 10s infinite alternate;
-}
-
-@keyframes move{
-from{transform:scale(1);}
-to{transform:scale(1.2);}
-}
-
-/* ===== LAYOUT ===== */
-.container{
-display:flex;
-}
-
-/* SIDEBAR */
-.sidebar{
-width:260px;
-height:100vh;
-background:rgba(15,18,30,0.7);
-backdrop-filter:blur(10px);
-border-right:1px solid rgba(255,255,255,0.08);
-padding:20px;
-position:fixed;
-}
-
-.logo{
-font-size:20px;
-font-weight:800;
-color:#FFD700;
-margin-bottom:20px;
-}
-
-.menu a{
-display:block;
-color:#aaa;
-text-decoration:none;
-margin:14px 0;
-transition:0.3s;
-}
-
-.menu a:hover{
-color:#FFD700;
-transform:translateX(5px);
-}
-
-/* MAIN */
-.main{
-margin-left:260px;
-padding:30px;
-width:100%;
-}
-
-/* HEADER */
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
-
-.search{
-padding:10px 14px;
-border-radius:20px;
-border:none;
-outline:none;
-background:#12182a;
-color:white;
-width:220px;
-}
-
-/* HERO */
-.hero{
-padding:40px;
-border-radius:18px;
-background:linear-gradient(135deg,#12182a,#0b0f1a);
-border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 20px 60px rgba(0,0,0,0.5);
-}
-
-.hero h1{
-color:#FFD700;
-font-size:42px;
-}
-
-.hero p{
-color:#aaa;
-margin-top:10px;
-}
-
-/* ===== RAIL SYSTEM ===== */
-.rail{
-margin-top:40px;
-}
-
-.rail h2{
-margin-bottom:12px;
-color:#ddd;
-}
-
-.row{
-display:flex;
-gap:16px;
-overflow-x:auto;
-scroll-behavior:smooth;
-padding-bottom:10px;
-}
-
-.row::-webkit-scrollbar{display:none;}
-
-/* ===== CARD ===== */
-.card{
-min-width:190px;
-height:230px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:14px;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-transition:0.3s;
-position:relative;
-backdrop-filter:blur(8px);
-}
-
-.card:hover{
-transform:translateY(-8px) scale(1.03);
-border-color:#FFD700;
-box-shadow:0 15px 40px rgba(255,215,0,0.15);
-}
-
-.tag{
-position:absolute;
-top:10px;
-left:10px;
-font-size:11px;
-padding:4px 8px;
-border-radius:10px;
-background:#FFD700;
-color:black;
-font-weight:700;
-}
-
-/* ===== MODAL ===== */
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.8);
-display:none;
-justify-content:center;
-align-items:center;
-}
-
-.modal-content{
-width:320px;
-padding:20px;
-border-radius:12px;
-background:#12182a;
-border:1px solid #FFD700;
-text-align:center;
-}
-
-.modal h2{
-color:#FFD700;
-}
-
-.close{
-margin-top:15px;
-padding:8px 12px;
-background:#FFD700;
-border:none;
-cursor:pointer;
-font-weight:700;
-}
-
-.hidden{display:none;}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wayne Enterprises // Operational Master Matrix V4</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+    <!-- HIGH-DENSITY GEOMETRIC AMBIENT ANIMATION CANVAS -->
+    <div class="animation-canvas" id="particle-core"></div>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-<div class="logo">ANIME V4</div>
+    <div class="container">
+        <!-- ARKHOS TACTICAL SYSTEM CONTROL SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="bat-icon">🦇</div>
+                <div class="logo-title">WAYNE OS // V4.0</div>
+            </div>
+            
+            <!-- MASTER SYSTEM CALIBRATION CONFIGURATOR -->
+            <div class="tactical-control-center">
+                <!-- SYSTEM LIGHT CHROMA MATRIX -->
+                <div class="control-row">
+                    <div class="control-title" id="lbl-vision">HUD VISION MATRIX</div>
+                    <div class="toggle-switch-wrapper">
+                        <button class="control-btn active" id="btn-night" onclick="setVisionMode('night')">NIGHT</button>
+                        <button class="control-btn" id="btn-day" onclick="setVisionMode('day')">SONAR</button>
+                    </div>
+                </div>
 
-<div class="menu">
-<a href="#">Home</a>
-<a href="#">Pirates</a>
-<a href="#">Marines</a>
-<a href="#">Legends</a>
-</div>
-</div>
+                <!-- LANGUAGE DECRYPTION UTILITY -->
+                <div class="control-row">
+                    <div class="control-title" id="lbl-decryption">DECRYPTION LANGUAGE</div>
+                    <div class="toggle-switch-wrapper">
+                        <button class="control-btn active" id="btn-en" onclick="setLanguage('en')">ENG</button>
+                        <button class="control-btn" id="btn-ja" onclick="setLanguage('ja')">JAP</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- INDEX INTERNAL SCROLL NAV PATHWAYS -->
+            <nav class="menu">
+                <a href="#profile-sec" class="active" id="nav-profile">OPERATIVE PROFILE</a>
+                <a href="#armory-sec" id="nav-armory">SUIT ARMORY</a>
+                <a href="#weapons-sec" id="nav-weapons">WEAPONS ARSENAL</a>
+            </nav>
 
-<!-- MAIN -->
-<div class="main">
+            <div class="system-status">
+                <span class="status-pulse"></span>
+                <span id="lbl-uplink">encrypted uplink: active</span>
+            </div>
+        </aside>
 
-<div class="topbar">
-<h2>Ultra Anime System</h2>
-<input class="search" id="search" placeholder="Search characters">
-</div>
+        <!-- MAIN TACTICAL MONITOR MATRIX -->
+        <main class="main">
+            <header class="topbar">
+                <h2 id="hdr-main">BAT-COMPUTER // <span>OPERATIVE_REGISTRY</span></h2>
+                <input type="text" class="search-box" id="search" placeholder="FILTER NETWORK DATABANKS...">
+            </header>
 
-<div class="hero">
-<h1>ANIME UNIVERSE V4</h1>
-<p>Ultra Pro UI System with rails + modal + search</p>
-</div>
+            <!-- SECTION I: SECURE USER IDENTITY HUD -->
+            <section class="hud-section" id="profile-sec">
+                <div class="section-header" id="hdr-profile-sec">SECURE PROFILE FILE</div>
+                <div class="profile-wrapper">
+                    <div class="bat-card profile-card" onclick="openTerminal('profile')">
+                        <div class="avatar-frame">
+                            <img src="IMG_0068.jpeg" alt="Rachit Kaul" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-fallback">[IMG_0068.JPEG]</div>
+                        </div>
+                        <h1 class="profile-name">Rachit Kaul</h1>
+                        <div class="profile-title" id="txt-title">Full Stack Developer</div>
+                        
+                        <div class="meta-grid">
+                            <div class="meta-row">
+                                <span class="meta-label" id="lbl-loc">Location:</span>
+                                <span class="meta-value" id="val-loc">Srinagar, India</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label" id="lbl-stat">Status:</span>
+                                <span class="meta-value" id="val-stat" style="color: var(--system-green);">Active Agent</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label" id="lbl-clr">Clearance:</span>
+                                <span class="meta-value">Level Alpha</span>
+                            </div>
+                        </div>
 
-<!-- RAIL -->
-<div class="rail">
-<h2>Pirates</h2>
-<div class="row" id="grid">
+                        <div class="skills-header" id="hdr-skills">Core Language Frameworks</div>
+                        <div class="tags-wrapper">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">HTML5/CSS3</span>
+                            <span class="tech-tag">SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-<div class="card" onclick="openModal('Luffy','Pirate King')">
-<div class="tag">Pirate</div>Luffy
-</div>
+            <!-- SECTION II: SUIT MODULATOR RAILS -->
+            <section class="hud-section" id="armory-sec">
+                <div class="section-header" id="hdr-armory-sec">WAYNE ARMORY // BAT-SUIT CONFIGURATIONS</div>
+                <div class="row-rail">
+                    <div class="bat-card armory-card" onclick="openTerminal('suit1')">
+                        <div class="item-icon">🛡️</div>
+                        <div class="item-name" id="suit1-title">Arkham Tactical Kevlar</div>
+                        <div class="item-spec" id="suit1-spec">Spec: Standard Armor Layer // High Mobility</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('suit2')">
+                        <div class="item-icon">🦾</div>
+                        <div class="item-name" id="suit2-title">Exo-Frame Power Armor</div>
+                        <div class="item-spec" id="suit2-spec">Spec: Anti-Superman Protocol // Heavy Impact Titanium</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('suit3')">
+                        <div class="item-icon">⚡</div>
+                        <div class="item-name" id="suit3-title">Beyond Stealth Under-weave</div>
+                        <div class="item-spec" id="suit3-spec">Spec: Light Refraction Stealth // Dynamic Camouflage</div>
+                    </div>
+                </div>
+            </section>
 
-<div class="card" onclick="openModal('Zoro','Sword Master')">
-<div class="tag">Pirate</div>Zoro
-</div>
+            <!-- SECTION III: ENFORCEMENT ARSENAL RAILS -->
+            <section class="hud-section" id="weapons-sec">
+                <div class="section-header" id="hdr-weapons-sec">TACTICAL ARSENAL // ADVANCED ENGAGEMENT GEAR</div>
+                <div class="row-rail">
+                    <div class="bat-card armory-card" onclick="openTerminal('weapon1')">
+                        <div class="item-icon">📐</div>
+                        <div class="item-name" id="weap1-title">Batarang Projectile</div>
+                        <div class="item-spec" id="weap1-spec">Type: Micro-Serrated Titanium // Remote Control Hook</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('weapon2')">
+                        <div class="item-icon">🔫</div>
+                        <div class="item-name" id="weap2-title">Grapnel Blast Launcher</div>
+                        <div class="item-spec" id="weap2-spec">Type: High-Tensile Anchor Rig // Speed Ascent Motor</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('weapon3')">
+                        <div class="item-icon">💥</div>
+                        <div class="item-name" id="weap3-title">Explosive Gel Dispenser</div>
+                        <div class="item-spec" id="weap3-spec">Type: Liquid Aerosol Charge // Proximity Detonation Trigger</div>
+                    </div>
+                </div>
+            </section>
 
-<div class="card" onclick="openModal('Sanji','Cook')">
-<div class="tag">Pirate</div>Sanji
-</div>
+            <!-- EMPTY-STATE FILTRATION ALERT NOTICE -->
+            <div id="no-records" class="hidden radar-error-alert">
+                ⚠️ Alert: Item or Operative completely filtered out of active radar.
+            </div>
+        </main>
+    </div>
 
-</div>
-</div>
+    <!-- CENTRAL ENCRYPTED LOG INTERCORE POPUP OVERLAY -->
+    <div class="bat-modal" id="terminal-modal" onclick="closeTerminalOnLayout(event)">
+        <div class="modal-terminal">
+            <h3 id="t-name">SYSTEM COMPILING...</h3>
+            <p id="t-desc">Decrypting structural memory sector variables...</p>
+            <button class="terminal-btn" id="btn-modal-close" onclick="closeTerminal()">Acknowledge</button>
+        </div>
+    </div>
 
-<!-- RAIL -->
-<div class="rail">
-<h2>Marines</h2>
-<div class="row">
-
-<div class="card" onclick="openModal('Akainu','Fleet Admiral')">
-<div class="tag">Marine</div>Akainu
-</div>
-
-<div class="card" onclick="openModal('Kizaru','Light Speed')">
-<div class="tag">Marine</div>Kizaru
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="modal-content">
-<h2 id="mname"></h2>
-<p id="mdesc"></p>
-<button class="close" onclick="closeModal()">Close</button>
-</div>
-</div>
-
-<script>
-
-/* SEARCH */
-document.getElementById("search").addEventListener("input",(e)=>{
-let val=e.target.value.toLowerCase();
-document.querySelectorAll(".card").forEach(c=>{
-c.style.display=c.innerText.toLowerCase().includes(val)?"flex":"none";
-});
-});
-
-/* MODAL */
-function openModal(name,desc){
-document.getElementById("modal").style.display="flex";
-document.getElementById("mname").innerText=name;
-document.getElementById("mdesc").innerText=desc;
-}
-
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
-
-</script>
-
+    <script src="dictionary.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
