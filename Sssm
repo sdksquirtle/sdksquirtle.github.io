@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wayne OS // Master V4</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="vision-night">
+
+    <!-- HIGH-DENSITY PARTICLE LAYER -->
+    <div class="animation-canvas" id="particle-core"></div>
+
+    <div class="container">
+        <!-- TACTICAL SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="bat-icon">🦇</div>
+                <div class="logo-title">WAYNE OS // MASTER_V4</div>
+            </div>
+            
+            <!-- CONTROLS HUD SWITCHERS -->
+            <div class="language-module">
+                <div class="lang-title" id="lbl-decryption">DECRYPTION LANGUAGE</div>
+                <div class="lang-toggle-wrapper">
+                    <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">ENG</button>
+                    <button class="lang-btn" id="btn-ja" onclick="setLanguage('ja')">JAP</button>
+                </div>
+            </div>
+
+            <div class="language-module">
+                <div class="lang-title" id="lbl-vision">HUD VISION MATRIX</div>
+                <div class="lang-toggle-wrapper">
+                    <button class="lang-btn active" id="btn-night" onclick="setVisionMode('night')">NIGHT</button>
+                    <button class="lang-btn" id="btn-sonar" onclick="setVisionMode('sonar')">SONAR</button>
+                </div>
+            </div>
+
+            <div class="language-module">
+                <div class="lang-title" id="lbl-armor">ARMORY CONFIGURATION</div>
+                <select class="tactical-dropdown" id="suit-selector" onchange="equipSuit(this.value)">
+                    <option value="arkham">ARKHAM KEVLAR</option>
+                    <option value="beyond">WAYNE BEYOND</option>
+                    <option value="hellbat">HELLBAT FRAME</option>
+                </select>
+            </div>
+
+            <div class="language-module">
+                <div class="lang-title" id="lbl-arsenal">WEAPON SYSTEMS</div>
+                <div class="lang-toggle-wrapper">
+                    <button class="lang-btn active" id="btn-batarang" onclick="toggleArsenal(false)">BATARANG</button>
+                    <button class="lang-btn" id="btn-gun" onclick="toggleArsenal(true)">GRAPNEL GUN</button>
+                </div>
+            </div>
+            
+            <nav class="menu">
+                <a href="#profile" class="active" id="nav-profile">OPERATIVE PROFILE</a>
+                <a href="#armory" id="nav-armory">SUIT ARMORY</a>
+                <a href="#arsenal" id="nav-weapons">WEAPONS ARSENAL</a>
+            </nav>
+
+            <div class="system-status">
+                <span class="status-pulse"></span> <span id="lbl-uplink">encrypted uplink: active</span>
+            </div>
+        </aside>
+
+        <!-- MAIN MONITOR HUB PANEL -->
+        <main class="main">
+            <header class="topbar">
+                <h2 id="hdr-main">BAT-COMPUTER // <span>OPERATIVE_REGISTRY</span></h2>
+                <input class="search-box" type="text" id="search" placeholder="FILTER NETWORK DATABANKS...">
+            </header>
+
+            <!-- SECTION: OPERATIVE DOSSIER -->
+            <section id="profile" class="hud-section">
+                <div class="section-header" id="hdr-profile-sec">SECURE PROFILE FILE</div>
+                <div class="profile-wrapper">
+                    <div class="bat-card profile-card suit-arkham" id="profile-card" onclick="triggerDossier()">
+                        <div class="avatar-frame">
+                            <img src="IMG_0068.jpeg" alt="Rachit Kaul Profile" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-fallback">[IMG_0068.JPEG]</div>
+                        </div>
+                        <h1 class="profile-name">Rachit Kaul</h1>
+                        <div class="profile-title" id="txt-title">Full Stack Developer</div>
+                        
+                        <div class="meta-grid">
+                            <div class="meta-row">
+                                <span class="meta-label" id="lbl-loc">Location:</span>
+                                <span class="meta-value" id="val-loc">Srinagar, India</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label" id="lbl-stat">Status:</span>
+                                <span class="meta-value" id="val-stat" style="color: var(--terminal-green);">Active Agent</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label" id="lbl-clr">Clearance:</span>
+                                <span class="meta-value">Level Alpha</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-header" id="hdr-skills">Core Language Frameworks</div>
+                        <div class="tags-wrapper">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">HTML5/CSS3</span>
+                            <span class="tech-tag">SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: SUIT CONFIGURATIONS -->
+            <section id="armory" class="hud-section">
+                <div class="section-header" id="hdr-armory-sec">WAYNE ARMORY // BAT-SUIT CONFIGURATIONS</div>
+                <div class="row-rail">
+                    <div class="bat-card armory-card" onclick="openTerminal('suit1')">
+                        <div class="item-icon">🛡️</div>
+                        <div class="item-name" id="suit1-title">Arkham Tactical Kevlar</div>
+                        <div class="item-spec">Spec: Standard Armor Layer // High Mobility</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('suit2')">
+                        <div class="item-icon">🦾</div>
+                        <div class="item-name" id="suit2-title">Exo-Frame Power Armor</div>
+                        <div class="item-spec">Spec: Anti-Superman Protocol // Heavy Impact</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('suit3')">
+                        <div class="item-icon">⚡</div>
+                        <div class="item-name" id="suit3-title">Beyond Stealth Under-weave</div>
+                        <div class="item-spec">Spec: Light Refraction Stealth // Camouflage</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: UTILITY GEAR -->
+            <section id="arsenal" class="hud-section">
+                <div class="section-header" id="hdr-weapons-sec">TACTICAL ARSENAL // ADVANCED ENGAGEMENT GEAR</div>
+                <div class="row-rail">
+                    <div class="bat-card armory-card" onclick="openTerminal('weapon1')">
+                        <div class="item-icon">📐</div>
+                        <div class="item-name">Batarang Projectile</div>
+                        <div class="item-spec">Type: Micro-Serrated Titanium // Remote Control</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('weapon2')">
+                        <div class="item-icon">🔍</div>
+                        <div class="item-name">Grapnel Blast Launcher</div>
+                        <div class="item-spec">Type: High-Tensile Anchor Rig // Speed Ascent</div>
+                    </div>
+                    <div class="bat-card armory-card" onclick="openTerminal('weapon3')">
+                        <div class="item-icon">📡</div>
+                        <div class="item-name">Explosive Gel Dispenser</div>
+                        <div class="item-spec">Type: Liquid Aerosol Charge // Proximity Detonation</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ERROR BLOCK -->
+            <div id="no-records" class="hidden" style="text-align: center; color: var(--text-muted); padding: 40px; font-size: 11px; text-transform: uppercase;">
+                <span id="lbl-norecords">⚠️ Alert: Item or Operative completely filtered out of active radar.</span>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL POPUP -->
+    <div class="bat-modal" id="terminal-modal" onclick="closeTerminalOnLayout(event)">
+        <div class="modal-terminal">
+            <h3 id="t-name">SYSTEM COMPILING...</h3>
+            <p id="t-desc">Decrypting structural memory sector variables...</p>
+            <button class="terminal-btn" id="btn-modal-close" onclick="closeTerminal()">Acknowledge</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
